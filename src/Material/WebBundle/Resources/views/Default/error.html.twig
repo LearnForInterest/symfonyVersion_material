@@ -1,0 +1,9 @@
+{% for flashMessage in app.session.flashbag.get('error') %}
+
+    {{ flashMessage }}
+
+{% endfor %}
+
+<a href="{{ path('product') }}">
+    Back to the product
+</a>

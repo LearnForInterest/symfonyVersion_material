@@ -1,0 +1,8 @@
+material_web:
+    resource: "@MaterialWebBundle/Controller/"
+    type:     annotation
+    prefix:   /
+
+app:
+    resource: "@AppBundle/Controller/"
+    type:     annotation

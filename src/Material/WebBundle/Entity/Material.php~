@@ -1,0 +1,231 @@
+<?php
+namespace Material\WebBundle\Entity;
+
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\ORM\Mapping as ORM;
+use Doctrine\ORM\Mapping\OneToMany;
+use Doctrine\ORM\Mapping\ManyToMany;
+
+/**
+ * Class material
+ * @ORM\Entity(repositoryClass="MaterialRepository")
+ * @ORM\Table(name="material")
+ */
+class Material{
+    /**
+     * @ORM\Id
+     * @ORM\Column(type="integer")
+     * @ORM\GeneratedValue(strategy="AUTO")
+     */
+    protected $id;
+
+    /**
+     * @ORM\Column(type="string")
+     */
+    protected $name;
+
+    /**
+     * @ORM\Column(type="string")
+     */
+    protected $description;
+
+    /**
+     * @ORM\Column(type="integer")
+     */
+    protected $price;
+
+    /**
+     * @ORM\Column(type="integer")
+     */
+    protected $number;
+
+    /**
+     * @OneToMany(targetEntity="Orderform",mappedBy="material")
+     */
+    private $orderforms;
+
+    /**
+     * @ManyToMany(targetEntity="Product",mappedBy="materials")
+     */
+    private $products;
+
+    public function __construct()
+    {
+        $this->orderforms = new ArrayCollection();
+        $this->products = new ArrayCollection();
+    }
+    
+
+    /**
+     * Get id
+     *
+     * @return integer 
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    /**
+     * Set name
+     *
+     * @param string $name
+     * @return Material
+     */
+    public function setName($name)
+    {
+        $this->name = $name;
+
+        return $this;
+    }
+
+    /**
+     * Get name
+     *
+     * @return string 
+     */
+    public function getName()
+    {
+        return $this->name;
+    }
+
+    /**
+     * Set description
+     *
+     * @param string $description
+     * @return Material
+     */
+    public function setDescription($description)
+    {
+        $this->description = $description;
+
+        return $this;
+    }
+
+    /**
+     * Get description
+     *
+     * @return string 
+     */
+    public function getDescription()
+    {
+        return $this->description;
+    }
+
+    /**
+     * Set price
+     *
+     * @param integer $price
+     * @return Material
+     */
+    public function setPrice($price)
+    {
+        $this->price = $price;
+
+        return $this;
+    }
+
+    /**
+     * Get price
+     *
+     * @return integer 
+     */
+    public function getPrice()
+    {
+        return $this->price;
+    }
+
+    /**
+     * Set number
+     *
+     * @param integer $number
+     * @return Material
+     */
+    public function setNumber($number)
+    {
+        $this->number = $number;
+
+        return $this;
+    }
+
+    /**
+     * Get number
+     *
+     * @return integer 
+     */
+    public function getNumber()
+    {
+        return $this->number;
+    }
+
+    /**
+     * Add orderforms
+     *
+     * @param \Material\WebBundle\Entity\Orderform $orderforms
+     * @return Material
+     */
+    public function addOrderform(\Material\WebBundle\Entity\Orderform $orderforms)
+    {
+        $this->orderforms[] = $orderforms;
+
+        return $this;
+    }
+
+    /**
+     * Remove orderforms
+     *
+     * @param \Material\WebBundle\Entity\Orderform $orderforms
+     */
+    public function removeOrderform(\Material\WebBundle\Entity\Orderform $orderforms)
+    {
+        $this->orderforms->removeElement($orderforms);
+    }
+
+    /**
+     * Get orderforms
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getOrderforms()
+    {
+        return $this->orderforms;
+    }
+
+    /**
+     * Add products
+     *
+     * @param \Material\WebBundle\Entity\Product $products
+     * @return Material
+     */
+    public function addProduct(\Material\WebBundle\Entity\Product $products)
+    {
+        $this->products[] = $products;
+
+        return $this;
+    }
+
+    /**
+     * Remove products
+     *
+     * @param \Material\WebBundle\Entity\Product $products
+     */
+    public function removeProduct(\Material\WebBundle\Entity\Product $products)
+    {
+        $this->products->removeElement($products);
+    }
+
+    /**
+     * Get products
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getProducts()
+    {
+        return $this->products;
+    }
+
+    public function __toString()
+    {
+        return $this->description;
+    }
+}
